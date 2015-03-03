@@ -23,6 +23,6 @@ object GetAggregatedObservationScenario {
           .check(status.is(session => session("status").as[String].toInt))
           .check(xpath("soap:Envelope", List("soap" -> "http://schemas.xmlsoap.org/soap/envelope/")).exists)
           .check(substring("GetObservationResponse"))
-          .check(xpath("//ns3:observationOutcome", List("ns3" -> "urn:riv:clinicalprocess:healthcond:basic:GetObservationResponder:1")).count.is(session => session("count").as[String].toInt))
+          .check(xpath("//ns3:observation", List("ns3" -> "urn:riv:clinicalprocess:healthcond:basic:GetObservationResponder:1")).count.is(session => session("count").as[String].toInt))
       )
 }

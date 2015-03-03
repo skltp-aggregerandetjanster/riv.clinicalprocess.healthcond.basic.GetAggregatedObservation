@@ -24,7 +24,7 @@ class TP02Smoke extends Simulation {
   val load = scenario("smoke")
                  .during(testDuration) {
                    exec(session => {
-                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","3")
+                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","2")
                    })    
                    .exec(GetAggregatedObservationScenario.request)
                    .pause(minWaitDuration, maxWaitDuration)

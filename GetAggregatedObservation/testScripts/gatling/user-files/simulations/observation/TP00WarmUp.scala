@@ -27,7 +27,7 @@ val baseURL             = "https://qa.esb.ntjp.se/vp/clinicalprocess/healthcond/
                  .repeat(times) {
 //                   feed(csv("patients.csv").queue)
                    exec(session => {
-                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","0")
+                     session.set("status","200").set("patientid","121212121212").set("name","Tolvan Tolvansson").set("count","2")
                    })    
                    .exec(GetAggregatedObservationScenario.request)
                    .pause(1 second)
