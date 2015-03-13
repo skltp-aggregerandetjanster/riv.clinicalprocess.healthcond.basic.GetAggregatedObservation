@@ -18,7 +18,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
     <artifactId>GetAggregatedObservation-parent</artifactId>
-    <version>1.0.0-RC2</version>
+    <version>1.0.0-RC3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GetAggregatedObservation-parent</name>
 
@@ -26,7 +26,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 			<url>http://github.com/skltp-aggregerandetjanster/riv.clinicalprocess.healthcond.basic.GetAggregatedObservation</url>
 			<connection>scm:git:git://github.com/skltp-aggregerandetjanster/riv.clinicalprocess.healthcond.basic.GetAggregatedObservation.git</connection>
 			<developerConnection>scm:git:git://github.com/skltp-aggregerandetjanster/riv.clinicalprocess.healthcond.basic.GetAggregatedObservation.git</developerConnection>
-      <tag>v1.0.0-RC2</tag>
+      <tag>HEAD</tag>
   	</scm>
 
     <modules>
