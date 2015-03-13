@@ -1,0 +1,9 @@
+.classpath
+.project
+GetAggregatedObservation-schemas/.settings
+GetAggregatedObservation-schemas/target
+GetAggregatedObservation-teststub/target
+GetAggregatedObservation/target
+GetAggregatedObservation-teststub/.settings
+target
+GetAggregatedObservation/.settings
