@@ -14,9 +14,9 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationType;
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.ObjectFactory;
-import se.riv.clinicalprocess.healthcond.basic.v1.IIType;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationType;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.ObjectFactory;
+import riv.clinicalprocess.healthcond.basic.v1.IIType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.test.producer.TestProducerDb;
@@ -26,32 +26,32 @@ public class QueryObjectFactoryTest {
 
 	private static final ObjectFactory OF = new ObjectFactory();
 	private QueryObjectFactoryImpl testObject = new QueryObjectFactoryImpl();
-	
+
 	@Before
 	public void beforeTest(){
 		testObject.setEiCategorization("chb-gm");
 		testObject.setEiServiceDomain("riv:clinicalprocess:healthcond:basic");
 	}
-	
+
 	@Test
 	public void findContentIsCreatedWithSourceSystem() throws Exception{
-		
+
 		//Create request
 		GetObservationType request = new GetObservationType();
 		request.setPatientId(createPatientId());
 		request.setSourceSystemId(createSourceSystemId(TestProducerDb.TEST_LOGICAL_ADDRESS_1));
 		//End create request
-		
+
 		//Create FindContent request
 		QueryObject queryObject = testObject.createQueryObject(createNode(request));
 		FindContentType findContent = queryObject.getFindContent();
-		
+
 		//Expected to be set with values
 		assertEquals("chb-gm", findContent.getCategorization());
 		assertEquals(TestProducerDb.TEST_RR_ID_ONE_HIT, findContent.getRegisteredResidentIdentification());
 		assertEquals("riv:clinicalprocess:healthcond:basic", findContent.getServiceDomain());
 		assertEquals(TestProducerDb.TEST_LOGICAL_ADDRESS_1, findContent.getSourceSystem());
-		
+
 		//Expected to be null
 		assertNull(findContent.getLogicalAddress());
 		assertNull(findContent.getBusinessObjectInstanceIdentifier());
@@ -59,27 +59,27 @@ public class QueryObjectFactoryTest {
 		assertNull(findContent.getDataController());
 		assertNull(findContent.getMostRecentContent());
 		assertNull(findContent.getOwner());
-		
+
 	}
-	
+
 	@Test
 	public void findContentIsCreatedWithEmptySourceSystem() throws Exception{
-		
+
 		//Create request
 		GetObservationType request = new GetObservationType();
 		request.setPatientId(createPatientId());
 		request.setSourceSystemId(createSourceSystemId(""));
 		//End create request
-		
+
 		//Create FindContent request
 		QueryObject queryObject = testObject.createQueryObject(createNode(request));
 		FindContentType findContent = queryObject.getFindContent();
-		
+
 		//Expected to be set with values
 		assertEquals("chb-gm", findContent.getCategorization());
 		assertEquals(TestProducerDb.TEST_RR_ID_ONE_HIT, findContent.getRegisteredResidentIdentification());
 		assertEquals("riv:clinicalprocess:healthcond:basic", findContent.getServiceDomain());
-		
+
 		//Expected to be null
 		assertNull(findContent.getLogicalAddress());
 		assertNull(findContent.getSourceSystem());
@@ -88,27 +88,27 @@ public class QueryObjectFactoryTest {
 		assertNull(findContent.getDataController());
 		assertNull(findContent.getMostRecentContent());
 		assertNull(findContent.getOwner());
-		
+
 	}
-	
+
 	@Test
 	public void findContentIsCreatedWithNullSourceSystem() throws Exception{
-		
+
 		//Create request
 		GetObservationType request = new GetObservationType();
 		request.setPatientId(createPatientId());
 		request.setSourceSystemId(createSourceSystemId(null));
 		//End create request
-		
+
 		//Create FindContent request
 		QueryObject queryObject = testObject.createQueryObject(createNode(request));
 		FindContentType findContent = queryObject.getFindContent();
-		
+
 		//Expected to be set with values
 		assertEquals("chb-gm", findContent.getCategorization());
 		assertEquals(TestProducerDb.TEST_RR_ID_ONE_HIT, findContent.getRegisteredResidentIdentification());
 		assertEquals("riv:clinicalprocess:healthcond:basic", findContent.getServiceDomain());
-		
+
 		//Expected to be null
 		assertNull(findContent.getLogicalAddress());
 		assertNull(findContent.getSourceSystem());
@@ -117,9 +117,9 @@ public class QueryObjectFactoryTest {
 		assertNull(findContent.getDataController());
 		assertNull(findContent.getMostRecentContent());
 		assertNull(findContent.getOwner());
-		
+
 	}
-	
+
 	private IIType createSourceSystemId(String sourceSystemId) {
 		IIType iiType = new IIType();
 		iiType.setRoot("1.2.752.129.2.1.3.1");
@@ -135,16 +135,16 @@ public class QueryObjectFactoryTest {
 	}
 
 	private Node createNode(GetObservationType request) throws Exception{
-		
+
 		// Since the class GetObservationType don't have an @XmlRootElement annotation
         // we need to use the ObjectFactory to add it.
 		JAXBElement<GetObservationType> requestJaxb = OF.createGetObservation(request);
-		
+
 		//Node to carry marshalled content
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document node = db.newDocument();
-		
+
         //Marshall
 		JAXBContext jc = JAXBContext.newInstance(GetObservationType.class);
 		Marshaller marshaller = jc.createMarshaller();
