@@ -5,9 +5,9 @@ import javax.jws.WebService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.riv.clinicalprocess.healthcond.basic.getobservation.v1.rivtabp21.GetObservationResponderInterface;
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationType;
+import riv.clinicalprocess.healthcond.basic.getobservation.v1.rivtabp21.GetObservationResponderInterface;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
 @WebService(serviceName = "GetObservationResponderService", portName = "GetObservationResponderPort", targetNamespace = "urn:riv:clinicalprocess:healthcond:basic:GetObservation:1:rivtabp21", name = "GetObservationInteraction")
@@ -21,7 +21,7 @@ public class GetAggregatedObservationTestProducer implements GetObservationRespo
 	}
 
 	public GetObservationResponseType getObservation(String logicalAddress, GetObservationType request) {
-	
+
         // TODO: CHANGE GENERATED SAMPLE CODE - START
 		log.info("### Virtual service for GetObservation call the source system with logical address: {} and patientId: {}", logicalAddress, request.getPatientId().getExtension());
 
@@ -31,7 +31,7 @@ public class GetAggregatedObservationTestProducer implements GetObservationRespo
         	response = new GetObservationResponseType();
         }
 
-		log.info("### Virtual service got {} observations in the reply from the source system with logical address: {} and patientId: {}", 
+		log.info("### Virtual service got {} observations in the reply from the source system with logical address: {} and patientId: {}",
 				new Object[] {response.getObservation().size(), logicalAddress, request.getPatientId().getExtension()});
 
         // TODO: CHANGE GENERATED SAMPLE CODE - END

@@ -27,8 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.RecursiveResourceBundle;
 
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
-import se.riv.clinicalprocess.healthcond.basic.v1.ObservationType;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
+import riv.clinicalprocess.healthcond.basic.v1.ObservationType;
 import se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedobservation.GetAggregatedObservationMuleServer;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusRecordType;
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;

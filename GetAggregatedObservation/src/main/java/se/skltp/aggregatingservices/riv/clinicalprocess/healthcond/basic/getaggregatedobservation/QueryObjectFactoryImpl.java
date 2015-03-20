@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.jaxb.JaxbUtil;
 import org.w3c.dom.Node;
 
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationType;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationType;
 import se.skltp.agp.riv.itintegration.engagementindex.findcontentresponder.v1.FindContentType;
 import se.skltp.agp.service.api.QueryObject;
 import se.skltp.agp.service.api.QueryObjectFactory;
@@ -28,7 +28,7 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 
 	/**
 	 * Transformerar GetMeasurement request till EI FindContent request enligt:
-	 * 
+	 *
 	 * 1. patientId --> registeredResidentIdentification
 	 * 2. riv:clinicalprocess:healthcond:basic --> serviceDomain
 	 * 3. chb-go --> categorization
@@ -36,17 +36,17 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 	 */
 	@Override
 	public QueryObject createQueryObject(Node node) {
-		
+
 		GetObservationType request = (GetObservationType)ju.unmarshal(node);
-		
+
 		if (log.isDebugEnabled()) log.debug("Transformed payload for pid: {}", request.getPatientId().getExtension());
 
-		FindContentType fc = new FindContentType();		
+		FindContentType fc = new FindContentType();
 		fc.setRegisteredResidentIdentification(request.getPatientId().getExtension());
 		fc.setServiceDomain(eiServiceDomain);
 		fc.setCategorization(eiCategorization);
 		fc.setSourceSystem(getSourceSystem(request));
-		
+
 		QueryObject qo = new QueryObject(fc, request);
 
 		return qo;

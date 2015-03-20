@@ -6,34 +6,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soitoolkit.commons.mule.util.ThreadSafeSimpleDateFormat;
 
-import se.riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
-import se.riv.clinicalprocess.healthcond.basic.v1.CVType;
-import se.riv.clinicalprocess.healthcond.basic.v1.CareGiverType;
-import se.riv.clinicalprocess.healthcond.basic.v1.CareUnitType;
-import se.riv.clinicalprocess.healthcond.basic.v1.IIType;
-import se.riv.clinicalprocess.healthcond.basic.v1.LegalAuthenticatorType;
-import se.riv.clinicalprocess.healthcond.basic.v1.LocationType;
-import se.riv.clinicalprocess.healthcond.basic.v1.ObservationType;
-import se.riv.clinicalprocess.healthcond.basic.v1.PatientType;
-import se.riv.clinicalprocess.healthcond.basic.v1.PerformerRoleType;
-import se.riv.clinicalprocess.healthcond.basic.v1.PersonType;
-import se.riv.clinicalprocess.healthcond.basic.v1.SourceSystemType;
-import se.riv.clinicalprocess.healthcond.basic.v1.TimePeriodType;
+import riv.clinicalprocess.healthcond.basic.getobservationresponder.v1.GetObservationResponseType;
+import riv.clinicalprocess.healthcond.basic.v1.CVType;
+import riv.clinicalprocess.healthcond.basic.v1.CareGiverType;
+import riv.clinicalprocess.healthcond.basic.v1.CareUnitType;
+import riv.clinicalprocess.healthcond.basic.v1.IIType;
+import riv.clinicalprocess.healthcond.basic.v1.LegalAuthenticatorType;
+import riv.clinicalprocess.healthcond.basic.v1.LocationType;
+import riv.clinicalprocess.healthcond.basic.v1.ObservationType;
+import riv.clinicalprocess.healthcond.basic.v1.PatientType;
+import riv.clinicalprocess.healthcond.basic.v1.PerformerRoleType;
+import riv.clinicalprocess.healthcond.basic.v1.PersonType;
+import riv.clinicalprocess.healthcond.basic.v1.SourceSystemType;
+import riv.clinicalprocess.healthcond.basic.v1.TimePeriodType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
 public class GetAggregatedObservationTestProducerDb extends TestProducerDb {
-	
+
 	ThreadSafeSimpleDateFormat sdf = new ThreadSafeSimpleDateFormat("YYYYMMddHHmmss");
 
 	private static final Logger log = LoggerFactory.getLogger(GetAggregatedObservationTestProducerDb.class);
-	
+
 	@Override
 	public Object processRequest(String logicalAddress,
 			String registeredResidentId) {
-		
+
 		/*
 		 *  Return an error-message if error logical address HSA-ID-6 is called.
-		 *  
+		 *
 		 *  This case was added to be able to test the case when a system returns an error for a certain
 		 *  RR_ID and another system returns a OK response. This case should probably be added to the
 		 *  agp test common TestProducerDb, but for know its included here to test the concept.
@@ -41,7 +41,7 @@ public class GetAggregatedObservationTestProducerDb extends TestProducerDb {
 		if (TEST_LOGICAL_ADDRESS_6.equals(logicalAddress)) {
 			throw new RuntimeException("Logical address to trigger exception was called: " + logicalAddress);
 		}
-		
+
 		return super.processRequest(logicalAddress, registeredResidentId);
 	}
 
@@ -56,10 +56,10 @@ public class GetAggregatedObservationTestProducerDb extends TestProducerDb {
 		}
 		return response;
 	}
-	
+
 	@Override
 	public Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId, String time) {
-		
+
 		if (log.isDebugEnabled()) {
 			log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}",
 				new Object[] {logicalAddress, registeredResidentId, businessObjectId});
@@ -81,12 +81,12 @@ public class GetAggregatedObservationTestProducerDb extends TestProducerDb {
 		observation.setType(createCVType());
 		observation.setValue(createCVType());
 		observation.setValueNegation(false);
-		
+
 		return observation;
         // TODO: CHANGE GENERATED SAMPLE CODE - END
 
 	}
-	
+
 	private TimePeriodType createTimeType() {
 		TimePeriodType period = new TimePeriodType();
 		period.setEnd(sdf.format(new Date()));
@@ -131,32 +131,32 @@ public class GetAggregatedObservationTestProducerDb extends TestProducerDb {
 		authenticator.setTime(sdf.format(new Date()));
 		return authenticator;
 	}
-	
+
 	private LocationType createLocation(String name) {
 		LocationType locationType = new LocationType();
 		locationType.setId(createId("1.2.752.129.2.1.4.1", "HSA-ID"));
 		locationType.setName(name);
 		return locationType;
 	}
-	
+
 	private CVType createCVType() {
 		CVType cvType = new CVType();
 		cvType.setCode("CODE");
 		cvType.setCodeSystem("CODESYSTEM");
 		return cvType;
 	}
-	
+
 	private PatientType createPatient(String registeredResidentId) {
 		PatientType patientType = new PatientType();
 		patientType.setId(createPatientId(registeredResidentId));
 		patientType.setDateOfBirth(registeredResidentId.substring(0, 8));
 		return patientType;
 	}
-	
+
 	private IIType createPatientId(String registeredResidentId) {
 		return createId("1.2.752.129.2.1.3.1", registeredResidentId);
 	}
-	
+
 	private SourceSystemType createSourceSystem(String logicalAddress) {
 		SourceSystemType sourceSystemType = new SourceSystemType();
 		sourceSystemType.setId(createId("1.2.752.129.2.1.4.1", logicalAddress));
