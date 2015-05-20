@@ -7,8 +7,8 @@
 
 SET @consumerHsaId = 'client';
 
-SET @serviceContractNamespace = 'urn:riv:clinicalprocess:healthcond:basic:GetObservation:1:rivtabp21';
-SET @popularDomainName = 'Hantera hälsorelaterade tillstånd, basuppgifter - GetObservation';
+SET @serviceContractNamespace = 'urn:riv:clinicalprocess:healthcond:basic:GetObservations:1:rivtabp21';
+SET @popularDomainName = 'Hantera hälsorelaterade tillstånd, basuppgifter - GetObservations';
 
 -- ===========================================================================
 -- Setup routing in TAK
@@ -24,7 +24,7 @@ INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid te
 INSERT INTO LogiskAdressat (beskrivning, hsaId, version) VALUES('Används vid tester av agg tjänst.', 'HSA-ID-7', 0);
 
 -- Sätt upp tjänstekomponent, teststubbe
-INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:9110/GetObservation/service/teststub/v1', 'Producent vid tester av Aggregerandetjänst.', CONCAT('HSA-ID-TESTSTUBBE-',@popularDomainName), 0);
+INSERT INTO Tjanstekomponent (adress, beskrivning, hsaId, version) VALUES('http://localhost:9110/GetObservations/service/teststub/v1', 'Producent vid tester av Aggregerandetjänst.', CONCAT('HSA-ID-TESTSTUBBE-',@popularDomainName), 0);
 
 -- Sätt upp logiska adresser
 INSERT INTO LogiskAdress (fromTidpunkt, tomTidpunkt, version, logiskAdressat_id, rivVersion_id, tjanstekontrakt_id, tjansteproducent_id)
