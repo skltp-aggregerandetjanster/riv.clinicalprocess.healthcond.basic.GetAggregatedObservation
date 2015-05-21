@@ -27,24 +27,6 @@ public class GetAggregatedObservationsTestProducerDb extends TestProducerDb {
     private static final Logger log = LoggerFactory.getLogger(GetAggregatedObservationsTestProducerDb.class);
 
     @Override
-    public Object processRequest(String logicalAddress, String registeredResidentId) {
-
-        /*
-         * Return an error-message if error logical address HSA-ID-6 is called.
-         * 
-         * This case was added to be able to test the case when a system returns
-         * an error for a certain RR_ID and another system returns a OK
-         * response. This case should probably be added to the agp test common
-         * TestProducerDb, but for know its included here to test the concept.
-         */
-        if (TEST_LOGICAL_ADDRESS_6.equals(logicalAddress)) {
-            throw new RuntimeException("Logical address to trigger exception was called: " + logicalAddress);
-        }
-
-        return super.processRequest(logicalAddress, registeredResidentId);
-    }
-
-    @Override
     public Object createResponse(Object... responseItems) {
         log.debug("Creates a response with {} items", responseItems);
         GetObservationsResponseType response = new GetObservationsResponseType();
@@ -57,11 +39,11 @@ public class GetAggregatedObservationsTestProducerDb extends TestProducerDb {
     @Override
     public Object createResponseItem(String logicalAddress, String registeredResidentId, String businessObjectId, String time) {
 
-        log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}", new Object[] { logicalAddress,
-                registeredResidentId, businessObjectId });
+        log.debug("Created one response item for logical-address {}, registeredResidentId {} and businessObjectId {}", 
+                new Object[] { logicalAddress, registeredResidentId, businessObjectId });
 
         ObservationGroupType observations = new ObservationGroupType();
-        
+
         observations.getAdditionalParticipant().add(new AdditionalParticipantType());
         observations.setLegalAuthenticator(new LegalAuthenticatorType());
         observations.setPatient(new PatientType());
@@ -70,7 +52,7 @@ public class GetAggregatedObservationsTestProducerDb extends TestProducerDb {
         observations.getPatient().getId().setExtension(registeredResidentId);
         observations.setPerformerRole(new PerformerRoleType());
         observations.setSourceSystem(new SourceSystemType());
-        
+
         observations.getObservation().add(new ObservationType());
         observations.getObservation().get(0).setApprovedForPatient(true);
         observations.getObservation().get(0).setDescription("Fritextbeskrivning av observationsen");

@@ -14,26 +14,25 @@ import se.skltp.agp.service.api.ResponseListFactory;
 
 public class ResponseListFactoryImpl implements ResponseListFactory {
 
-	private static final Logger log = LoggerFactory.getLogger(ResponseListFactoryImpl.class);
-	private static final JaxbUtil jaxbUtil = new JaxbUtil(GetObservationsResponseType.class, ProcessingStatusType.class);
-	private static final ObjectFactory OF = new ObjectFactory();
+    private static final Logger log = LoggerFactory.getLogger(ResponseListFactoryImpl.class);
+    private static final JaxbUtil jaxbUtil = new JaxbUtil(GetObservationsResponseType.class, ProcessingStatusType.class);
+    private static final ObjectFactory OF = new ObjectFactory();
 
-	@Override
-	public String getXmlFromAggregatedResponse(QueryObject queryObject, List<Object> aggregatedResponseList) {
-		GetObservationsResponseType aggregatedResponse = new GetObservationsResponseType();
+    @Override
+    public String getXmlFromAggregatedResponse(QueryObject queryObject, List<Object> aggregatedResponseList) {
+        GetObservationsResponseType aggregatedResponse = new GetObservationsResponseType();
 
-		for (Object object : aggregatedResponseList) {
-			GetObservationsResponseType response = (GetObservationsResponseType)object;
-			aggregatedResponse.getObservationGroup().addAll(response.getObservationGroup());
-		}
-
-	    if (log.isInfoEnabled()) {
-    		String patientId = queryObject.getFindContent().getRegisteredResidentIdentification();
-        	log.info("Returning {} aggregated observationss for patient id {}", aggregatedResponse.getObservationGroup().size() ,patientId);
+        for (Object object : aggregatedResponseList) {
+            GetObservationsResponseType response = (GetObservationsResponseType) object;
+            aggregatedResponse.getObservationGroup().addAll(response.getObservationGroup());
         }
 
-        // Since the class GetObservationsResponseType don't have an @XmlRootElement annotation
-        // we need to use the ObjectFactory to add it.
+        if (log.isInfoEnabled()) {
+            String patientId = queryObject.getFindContent().getRegisteredResidentIdentification();
+            log.info("Returning {} aggregated observationss for patient id {}", aggregatedResponse.getObservationGroup().size(), patientId);
+        }
+
+        // Since the class GetObservationsResponseType doen't have an @XmlRootElement annotation we need to use the ObjectFactory to add it.
         return jaxbUtil.marshal(OF.createGetObservationsResponse(aggregatedResponse));
-	}
+    }
 }

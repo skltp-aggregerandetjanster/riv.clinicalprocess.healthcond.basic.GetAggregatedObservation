@@ -6,7 +6,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
 [soi-toolkit.gen.createDate=2015-03-31T14:36:31.910+02:00]
 [soi-toolkit.gen.artifactId=GetAggregatedObservations]
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -216,7 +218,6 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <!--<outputDirectory>target/classes</outputDirectory> -->
               <outputDirectory>${project.build.outputDirectory}</outputDirectory>
               <resources>
                 <resource>
@@ -240,9 +241,9 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
       <id>muleServer</id>
       <!-- Start mule server with the command
            mvn -PmuleServer
-           or
+             or
            mvn -PmuleServer -Dexec.args="${artifaceId}-config.xml"
-           if you want to override the default config-file -->
+             if you want to override the default config-file -->
       <build>
         <defaultGoal>test</defaultGoal>
         <plugins>

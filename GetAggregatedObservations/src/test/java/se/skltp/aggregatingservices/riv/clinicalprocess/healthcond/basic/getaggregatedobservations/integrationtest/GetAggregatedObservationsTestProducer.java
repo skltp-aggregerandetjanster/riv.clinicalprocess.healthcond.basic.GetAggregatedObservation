@@ -10,34 +10,34 @@ import riv.clinicalprocess.healthcond.basic.getobservationsresponder.v1.GetObser
 import riv.clinicalprocess.healthcond.basic.getobservationsresponder.v1.GetObservationsType;
 import se.skltp.agp.test.producer.TestProducerDb;
 
-@WebService(serviceName = "GetObservationsResponderService", portName = "GetObservationsResponderPort", targetNamespace = "urn:riv:clinicalprocess:healthcond:basic:GetObservations:1:rivtabp21", name = "GetObservationsInteraction")
+@WebService(serviceName = "GetObservationsResponderService", 
+               portName = "GetObservationsResponderPort", 
+        targetNamespace = "urn:riv:clinicalprocess:healthcond:basic:GetObservations:1:rivtabp21", 
+                   name = "GetObservationsInteraction")
 public class GetAggregatedObservationsTestProducer implements GetObservationsResponderInterface {
 
-	private static final Logger log = LoggerFactory.getLogger(GetAggregatedObservationsTestProducer.class);
+    private static final Logger log = LoggerFactory.getLogger(GetAggregatedObservationsTestProducer.class);
 
-	private TestProducerDb testDb;
-	public void setTestDb(TestProducerDb testDb) {
-		this.testDb = testDb;
-	}
+    private TestProducerDb testDb;
 
-	public GetObservationsResponseType getObservations(String logicalAddress, GetObservationsType request) {
+    public void setTestDb(TestProducerDb testDb) {
+        this.testDb = testDb;
+    }
 
-        // TODO: CHANGE GENERATED SAMPLE CODE - START
-		log.info("### Virtual service for GetObservations call the source system with logical address: {} and patientId: {}", logicalAddress, request.getPatientId().getExtension());
+    public GetObservationsResponseType getObservations(String logicalAddress, GetObservationsType request) {
+        log.info("### Virtual service for GetObservations call the source system with logical address: {} and patientId: {}", 
+                logicalAddress, request.getPatientId().getExtension());
 
-		GetObservationsResponseType response = (GetObservationsResponseType)testDb.processRequest(logicalAddress, request.getPatientId().getExtension());
+        GetObservationsResponseType response 
+            = (GetObservationsResponseType) testDb.processRequest(logicalAddress, request.getPatientId().getExtension());
         if (response == null) {
-        	// Return an empty response object instead of null if nothing is found
-        	response = new GetObservationsResponseType();
+            // Return an empty response object instead of null if nothing is found
+            response = new GetObservationsResponseType();
         }
 
-		log.info("### Virtual service got {} observationss in the reply from the source system with logical address: {} and patientId: {}",
-				new Object[] {response.getObservationGroup().size(), logicalAddress, request.getPatientId().getExtension()});
-
-        // TODO: CHANGE GENERATED SAMPLE CODE - END
-
-
-		// We are done
+        log.info("### Virtual service got {} observationss in the reply from the source system with logical address: {} and patientId: {}",
+                new Object[] { response.getObservationGroup().size(), logicalAddress, request.getPatientId().getExtension() });
+        // We are done
         return response;
-	}
+    }
 }
