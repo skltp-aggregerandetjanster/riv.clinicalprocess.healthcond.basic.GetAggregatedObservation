@@ -1,10 +1,10 @@
 
 
 
-SET @serviceContractNamespace = 'urn:riv:clinicalprocess:healthcond:basic:GetObservation:1:rivtabp21';
-SET @popularDomainName = 'Hantera hälsorelaterade tillstånd, basuppgifter - GetObservation';
-SET @pathToServices = 'http://localhost:8081/GetAggregatedObservation/service/v1';
-SET @producerHsaId = 'GetAggregatedObservation';
+SET @serviceContractNamespace = 'urn:riv:clinicalprocess:healthcond:basic:GetObservations:1:rivtabp21';
+SET @popularDomainName = 'Hantera hälsorelaterade tillstånd, basuppgifter - GetObservations';
+SET @pathToServices = 'http://localhost:8081/GetAggregatedObservations/service/v1';
+SET @producerHsaId = 'GetAggregatedObservations';
 SET @consumerHsaId = 'client';
 
 -- ===========================================================================
