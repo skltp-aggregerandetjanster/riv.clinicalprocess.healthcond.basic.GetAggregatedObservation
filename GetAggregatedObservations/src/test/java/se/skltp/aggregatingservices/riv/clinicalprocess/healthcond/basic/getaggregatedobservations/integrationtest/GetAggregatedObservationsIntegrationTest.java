@@ -63,6 +63,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC2 - Agda Andersson
      * Perform a test that is expected to return zero hits
      */
     @Test
@@ -71,6 +72,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC2 - Agda Andersson
      * Perform a test that is expected to return an exception due to missing
      * mandatory http headers (sender-id and original-consumer-id)
      */
@@ -99,6 +101,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC3 - Sven Sturesson
      * Perform a test that is expected to return one hit with data from one source system
      */
     @Test
@@ -108,6 +111,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC4 - Ulla Alm
      * Perform a test that is expected to return one hit with data from one explicit sourcesystemId, several source systems in EI
      */
     @Test
@@ -124,6 +128,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC4 - Ulla Alm
      * Perform a test that is expected to return three hit with data from two
      * source systems and one source system that cause a timeout
      */
@@ -145,13 +150,12 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC5 - Gunbritt Boden
      * Perform a test that is expected to cause the source system to fail with its processing
      */
     @Test
     public void test_fault_invalidInput() throws Exception {
-
         List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_FAULT_INVALID_ID, 1);
-
         // Verify the Processing Status, expect a processing failure from the source system
         assertProcessingStatusNoDataSynchFailed(statusList.get(0), TEST_LOGICAL_ADDRESS_1, VIRTUALIZATION_PLATFORM, EXPECTED_ERR_INVALID_ID_MSG);
     }
