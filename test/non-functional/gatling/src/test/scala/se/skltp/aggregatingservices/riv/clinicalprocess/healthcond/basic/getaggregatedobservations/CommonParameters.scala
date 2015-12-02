@@ -1,4 +1,4 @@
-package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.description.getaggregatedobservations
+package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggregatedobservations
 
 trait CommonParameters {
   val serviceName:String     = "Observations"

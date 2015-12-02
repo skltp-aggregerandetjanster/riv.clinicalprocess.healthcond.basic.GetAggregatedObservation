@@ -27,7 +27,7 @@ public class GetAggregatedObservationsTestConsumer extends AbstractTestConsumer<
         String personnummer = TEST_RR_ID_ONE_HIT;
 
         GetAggregatedObservationsTestConsumer consumer 
-            = new GetAggregatedObservationsTestConsumer(serviceAddress, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID);
+            = new GetAggregatedObservationsTestConsumer(serviceAddress, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID);
         Holder<GetObservationsResponseType> responseHolder = new Holder<GetObservationsResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
 
@@ -36,9 +36,9 @@ public class GetAggregatedObservationsTestConsumer extends AbstractTestConsumer<
         log.info("Returned #observationss = " + responseHolder.value.getObservationGroup().size());
     }
 
-    public GetAggregatedObservationsTestConsumer(String serviceAddress, String senderId, String originalConsumerHsaId) {
+    public GetAggregatedObservationsTestConsumer(String serviceAddress, String senderId, String originalConsumerHsaId, String correlationId) {
         // Setup a web service proxy for communication using HTTPS with Mutual Authentication
-        super(GetObservationsResponderInterface.class, serviceAddress, senderId, originalConsumerHsaId);
+        super(GetObservationsResponderInterface.class, serviceAddress, senderId, originalConsumerHsaId, correlationId);
     }
 
     public void callService(String logicalAddress, String registeredResidentId, String sourceSystemId,
@@ -59,7 +59,7 @@ public class GetAggregatedObservationsTestConsumer extends AbstractTestConsumer<
         GetObservationsType request = new GetObservationsType();
         request.setPatientId(createID("1.2.752.129.2.1.3.1", registeredResidentId));
         request.setTime(createTimePeriodType(starTime, endTime));
-        request.setSourceSystemHSAId(sourceSystemId);
+//      request.setSourceSystemHSAId(sourceSystemId);
         GetObservationsResponseType response = _service.getObservations(logicalAddress, request);
         responseHolder.value = response;
         processingStatusHolder.value = SoapHeaderCxfInterceptor.getLastFoundProcessingStatus();
