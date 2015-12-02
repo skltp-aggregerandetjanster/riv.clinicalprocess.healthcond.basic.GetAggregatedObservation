@@ -3,6 +3,7 @@ package se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getagg
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static se.skltp.agp.riv.interoperability.headers.v1.CausingAgentEnum.VIRTUALIZATION_PLATFORM;
+import static se.skltp.agp.test.consumer.AbstractTestConsumer.SAMPLE_CORRELATION_ID;
 import static se.skltp.agp.test.consumer.AbstractTestConsumer.SAMPLE_ORIGINAL_CONSUMER_HSAID;
 import static se.skltp.agp.test.consumer.AbstractTestConsumer.SAMPLE_SENDER_ID;
 import static se.skltp.agp.test.producer.TestProducerDb.TEST_BO_ID_MANY_HITS_1;
@@ -39,7 +40,6 @@ import se.skltp.agp.test.producer.TestProducerLogger;
 
 public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateIntegrationTest {
 
-    @SuppressWarnings("unused")
     private static final Logger log = LoggerFactory.getLogger(GetAggregatedObservationsIntegrationTest.class);
 
     private static final RecursiveResourceBundle rb = new RecursiveResourceBundle("GetAggregatedObservations-config");
@@ -63,6 +63,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
+     * TC2 - Agda Andersson
      * Perform a test that is expected to return zero hits
      */
     @Test
@@ -71,30 +72,33 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
     }
 
     /**
-     * Perform a test that is expected to return an exception due to missing
-     * mandatory http headers (sender-id and original-consumer-id)
+     * Perform a test that is expected to return an exception due to missing mandatory http headers
      */
     @Test
     public void test_fault_missing_http_headers() {
         try {
-            doTest(TEST_RR_ID_ZERO_HITS, null, SAMPLE_ORIGINAL_CONSUMER_HSAID, null, 0);
+            doTest(TEST_RR_ID_ZERO_HITS, null, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID, 0);
             fail("This one should fail on missing http header");
         } catch (SOAPFaultException e) {
             assertEquals("Mandatory HTTP header x-vp-sender-id is missing", e.getMessage());
         }
 
         try {
-            doTest(TEST_RR_ID_ZERO_HITS, SAMPLE_SENDER_ID, null, null, 0);
+            doTest(TEST_RR_ID_ZERO_HITS, SAMPLE_SENDER_ID, null, SAMPLE_CORRELATION_ID, 0);
             fail("This one should fail on missing http header");
         } catch (SOAPFaultException e) {
-            assertEquals("Mandatory HTTP header x-rivta-original-serviceconsumer-hsaid is missing", e.getMessage());
+            assertEquals("\nMandatory HTTP header x-rivta-original-serviceconsumer-hsaid is missing", e.getMessage());
         }
 
         try {
             doTest(TEST_RR_ID_ZERO_HITS, null, null, null, 0);
             fail("This one should fail on missing http header");
         } catch (SOAPFaultException e) {
-            assertEquals("Mandatory HTTP headers x-vp-sender-id and x-rivta-original-serviceconsumer-hsaid are missing", e.getMessage());
+            String s = e.getMessage();
+            log.debug("something:" + s);
+            assertEquals(
+                    "Mandatory HTTP header x-vp-sender-id is missing\nMandatory HTTP header x-rivta-original-serviceconsumer-hsaid is missing\nMandatory HTTP header x-skltp-correlation-id is missing",
+                    e.getMessage());
         }
     }
 
@@ -103,40 +107,23 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
      */
     @Test
     public void test_ok_one_hit() {
+
         List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_ONE_HIT, 2, new ExpectedTestData(TEST_BO_ID_ONE_HIT, TEST_LOGICAL_ADDRESS_1));
+
         assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
     }
 
     /**
-     * Perform a test that is expected to return one hit with data from one explicit sourcesystemId, several source systems in EI
-     */
-    @Test
-    public void test_ok_one_hit_several_sourcesystems() {
-        // Setup call and verify the response, expect two booking from source #2, but with engagements in source #1 and source #3
-        List<ProcessingStatusRecordType> statusList 
-              = doTest(TEST_RR_ID_MANY_HITS, 
-                       TEST_LOGICAL_ADDRESS_2, 
-                       1, 
-                       new ExpectedTestData(TEST_BO_ID_MANY_HITS_1, TEST_LOGICAL_ADDRESS_1), 
-                       new ExpectedTestData(TEST_BO_ID_MANY_HITS_2, TEST_LOGICAL_ADDRESS_2));
-
-        assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_2);
-    }
-
-    /**
-     * Perform a test that is expected to return three hit with data from two
-     * source systems and one source system that cause a timeout
+     * Perform a test that is expected to return three hit with data from two source systems and one source system that cause a timeout
      */
     @Test
     public void test_ok_many_hits_with_partial_timeout() {
 
         // Setup call and verify the response, expect one booking from source #1, two from source #2 and a timeout from source #3
-        List<ProcessingStatusRecordType> statusList 
-              = doTest(TEST_RR_ID_MANY_HITS, 
-                       3, 
-                       new ExpectedTestData(TEST_BO_ID_MANY_HITS_1, TEST_LOGICAL_ADDRESS_1), 
-                       new ExpectedTestData(TEST_BO_ID_MANY_HITS_2, TEST_LOGICAL_ADDRESS_2), 
-                       new ExpectedTestData(TEST_BO_ID_MANY_HITS_3, TEST_LOGICAL_ADDRESS_2));
+        List<ProcessingStatusRecordType> statusList = doTest(TEST_RR_ID_MANY_HITS, 3,
+            new ExpectedTestData(TEST_BO_ID_MANY_HITS_1, TEST_LOGICAL_ADDRESS_1),
+            new ExpectedTestData(TEST_BO_ID_MANY_HITS_2, TEST_LOGICAL_ADDRESS_2),
+            new ExpectedTestData(TEST_BO_ID_MANY_HITS_3, TEST_LOGICAL_ADDRESS_2));
 
         // Verify the Processing Status, expect ok from source system #1 and #2 but a timeout from #3
         assertProcessingStatusDataFromSource(statusList.get(0), TEST_LOGICAL_ADDRESS_1);
@@ -165,20 +152,7 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
      * @return
      */
     private List<ProcessingStatusRecordType> doTest(String registeredResidentId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
-        return doTest(registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, null, expectedProcessingStatusSize, testData);
-    }
-
-    /**
-     * Helper method for performing a call to the aggregating service and perform some common validations of the result
-     *
-     * @param registeredResidentId
-     * @param expectedProcessingStatusSize
-     * @param testData
-     * @return
-     */
-    private List<ProcessingStatusRecordType> doTest(String registeredResidentId, String sourceSystemId, int expectedProcessingStatusSize,
-            ExpectedTestData... testData) {
-        return doTest(registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, sourceSystemId, expectedProcessingStatusSize, testData);
+        return doTest(registeredResidentId, SAMPLE_SENDER_ID, SAMPLE_ORIGINAL_CONSUMER_HSAID, SAMPLE_CORRELATION_ID, expectedProcessingStatusSize, testData);
     }
 
     /**
@@ -191,15 +165,13 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
      * @param testData
      * @return
      */
-    private List<ProcessingStatusRecordType> doTest(String registeredResidentId, String senderId, String originalConsumerHsaId,
-            String sourceSystemId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
+    private List<ProcessingStatusRecordType> doTest(String registeredResidentId, String senderId, String originalConsumerHsaId, String correlationId, int expectedProcessingStatusSize, ExpectedTestData... testData) {
 
         // Setup and perform the call to the web service
-        GetAggregatedObservationsTestConsumer consumer = new GetAggregatedObservationsTestConsumer(DEFAULT_SERVICE_ADDRESS, senderId,
-                originalConsumerHsaId);
+        GetAggregatedObservationsTestConsumer consumer = new GetAggregatedObservationsTestConsumer(DEFAULT_SERVICE_ADDRESS, senderId, originalConsumerHsaId, correlationId);
         Holder<GetObservationsResponseType> responseHolder = new Holder<GetObservationsResponseType>();
         Holder<ProcessingStatusType> processingStatusHolder = new Holder<ProcessingStatusType>();
-        consumer.callService(LOGICAL_ADDRESS, registeredResidentId, sourceSystemId, processingStatusHolder, responseHolder);
+        consumer.callService(LOGICAL_ADDRESS, registeredResidentId, processingStatusHolder, responseHolder);
 
         // Verify the response size and content
         GetObservationsResponseType response = responseHolder.value;
@@ -208,9 +180,10 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
         assertEquals(expextedResponseSize, response.getObservationGroup().size());
 
         for (int i = 0; i < testData.length; i++) {
-            ObservationGroupType responseElement = response.getObservationGroup().get(i);
+            final ObservationGroupType responseElement = response.getObservationGroup().get(i);
             assertEquals(registeredResidentId, responseElement.getPatient().getId().getExtension());
         }
+
 
         // Verify the size of the processing status and return it for further analysis
         ProcessingStatusType statusList = processingStatusHolder.value;
@@ -222,8 +195,8 @@ public class GetAggregatedObservationsIntegrationTest extends AbstractAggregateI
         // Verify that correct "x-rivta-original-serviceconsumer-hsaid" http header was passed to the engagement index
         assertEquals(SAMPLE_ORIGINAL_CONSUMER_HSAID, EngagemangsindexTestProducerLogger.getLastOriginalConsumer());
 
-        // Verify that correct "x-vp-sender-id" and "x-rivta-original-serviceconsumer-hsaid" http header 
-        // were passed to the service producer, given that a service producer was called
+        // Verify that correct "x-vp-sender-id" and "x-rivta-original-serviceconsumer-hsaid" http header was passed to the service producer,
+        // given that a service producer was called
         if (expectedProcessingStatusSize > 0) {
             assertEquals(SAMPLE_SENDER_ID, TestProducerLogger.getLastSenderId());
             assertEquals(SAMPLE_ORIGINAL_CONSUMER_HSAID, TestProducerLogger.getLastOriginalConsumer());
