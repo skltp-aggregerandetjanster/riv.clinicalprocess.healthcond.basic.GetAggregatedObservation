@@ -17,6 +17,7 @@ import se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic.getaggr
 import se.skltp.agp.riv.interoperability.headers.v1.ProcessingStatusType;
 import se.skltp.agp.test.consumer.AbstractTestConsumer;
 import se.skltp.agp.test.consumer.SoapHeaderCxfInterceptor;
+import se.skltp.agp.test.producer.TestProducerDb;
 
 public class GetAggregatedObservationsTestConsumer extends AbstractTestConsumer<GetObservationsResponderInterface> {
 
@@ -77,7 +78,10 @@ public class GetAggregatedObservationsTestConsumer extends AbstractTestConsumer<
         request.getObservationType().add(createType());
         request.getObservationId().add(createID("1.2.752.129.2.1.2.1", "HSA-ID-1"));
         request.setCareGiverId(createID("1.2.752.129.2.1.4.1", "HSA-ID-1"));
-        request.setSourceSystemHSAId("HSA-ID-1");
+        IIType systemId = new IIType();
+        systemId.setRoot("1.2.752.129.2.1.4.1");
+        systemId.setExtension("HSA-ID-1");
+        request.setSourceSystemId(systemId);
         request.setCareUnitId(createID("1.2.752.129.2.1.4.1", "HSA-ID-1"));
 
         GetObservationsResponseType response = _service.getObservations(logicalAddress, request);

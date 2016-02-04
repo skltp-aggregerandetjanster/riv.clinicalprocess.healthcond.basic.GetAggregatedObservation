@@ -131,6 +131,7 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="YYYY"/>
 			<xs:enumeration value="YYYYMM"/>
+			<xs:enumeration value="YYYYMMDD"/>
 			<xs:enumeration value="YYYYMMDDhh"/>
 			<xs:enumeration value="YYYYMMDDhhmm"/>
 			<xs:enumeration value="YYYYMMDDhhmmss"/>
