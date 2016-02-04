@@ -13,7 +13,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <parent>
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
     <artifactId>GetAggregatedObservations-parent</artifactId>
-    <version>1.0.0-RC9-SNAPSHOT</version>
+    <version>1.1.0-RC1-SNAPSHOT</version>
   </parent>
 
   <artifactId>GetAggregatedObservations-schemas</artifactId>
@@ -54,7 +54,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
               <sourceRoot>${schema.gen.src.dir}</sourceRoot>
               <wsdlOptions>
                 <wsdloption>
-                  <wsdl>${schema.path}/TD_CLINICALPROCESS_HEALTHCOND_BASIC_1.0_RC7/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl</wsdl>
+                  <wsdl>${schema.path}/clinicalprocess_healthcond_basic_1.0/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl</wsdl>
                   <extraargs>
                     <extraarg>-p</extraarg>
                     <extraarg>http://www.w3.org/2005/08/addressing=org.w3c.addressing.v1</extraarg>
