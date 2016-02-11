@@ -82,7 +82,6 @@
 			</value>
 			<valueNegation>false</valueNegation>
 			<approvedForPatient>true</approvedForPatient>
-			<registrationTime>20140911121800</registrationTime>
 		</observation>
 		<observation>
 			<id>
@@ -112,7 +111,6 @@
 			</value>
 			<valueNegation>false</valueNegation>
 			<approvedForPatient>true</approvedForPatient>
-			<registrationTime>20140911121800</registrationTime>
 		</observation>
 	</tns:observationGroup>
 </tns:GetObservationsResponse>

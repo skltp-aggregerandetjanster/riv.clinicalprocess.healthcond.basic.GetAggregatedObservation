@@ -52,22 +52,10 @@ public class QueryObjectFactoryImpl implements QueryObjectFactory {
 		return qo;
 	}
 
-	/**
-	 * Enligt TKB: Används när man vill söka ur ett specifikt källsystem.  
-	 * HSA-id för det källsystem inom vilket aktivitetsId är unikt.
-	 * 
-	 * sourceSystemId.root: Root sätts till OID för HSA-id: 1.2.752.129.2.1.4.1
-	 * sourceSystemId.extension: Källsystemets HSA-id.
-	 * 
-	 * Någon kontroll av OID görs inte här utan ansvaret läggs på källsystemet.
-	 * 
-	 * @param request
-	 * @return
-	 */
 	String getSourceSystem(GetObservationsType request) {
-		if(request.getSourceSystemId() == null || StringUtils.isBlank(request.getSourceSystemId().getExtension())) {
+		if(request.getSourceSystemHSAId() == null || StringUtils.isBlank(request.getSourceSystemHSAId())) {
 			return null;
 		}
-		return request.getSourceSystemId().getExtension();
+		return request.getSourceSystemHSAId();
 	}
 }
