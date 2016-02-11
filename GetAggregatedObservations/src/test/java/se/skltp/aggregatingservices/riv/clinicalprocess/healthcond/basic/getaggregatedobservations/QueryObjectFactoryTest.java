@@ -38,10 +38,7 @@ public class QueryObjectFactoryTest {
         // Create request
         GetObservationsType request = new GetObservationsType();
         request.setPatientId(createPatientId());
-        IIType systemId = new IIType();
-        systemId.setRoot("1.2.752.129.2.1.4.1");
-        systemId.setExtension(TestProducerDb.TEST_LOGICAL_ADDRESS_1);
-        request.setSourceSystemId(systemId);
+        request.setSourceSystemHSAId(TestProducerDb.TEST_LOGICAL_ADDRESS_1);
         // End create request
 
         // Create FindContent request
@@ -70,10 +67,7 @@ public class QueryObjectFactoryTest {
         // Create request
         GetObservationsType request = new GetObservationsType();
         request.setPatientId(createPatientId());
-        IIType systemId = new IIType();
-        systemId.setRoot("1.2.752.129.2.1.4.1");
-        systemId.setExtension("");
-        request.setSourceSystemId(systemId);
+        request.setSourceSystemHSAId("");
         // End create request
 
         // Create FindContent request
@@ -102,7 +96,7 @@ public class QueryObjectFactoryTest {
         // Create request
         GetObservationsType request = new GetObservationsType();
         request.setPatientId(createPatientId());
-        request.setSourceSystemId(null);
+        request.setSourceSystemHSAId(null);
         // End create request
 
         // Create FindContent request

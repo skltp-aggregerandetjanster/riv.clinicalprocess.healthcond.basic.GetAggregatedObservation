@@ -43,8 +43,8 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
         GetObservationsType originalRequest = (GetObservationsType) qo.getExtraArg();
         String sourceSystemId = "";
-        if (originalRequest.getSourceSystemId() != null) {
-        	sourceSystemId = originalRequest.getSourceSystemId().getExtension();
+        if (originalRequest.getSourceSystemHSAId() != null) {
+        	sourceSystemId = originalRequest.getSourceSystemHSAId();
         }
 
         FindContentResponseType eiResp = (FindContentResponseType) src;

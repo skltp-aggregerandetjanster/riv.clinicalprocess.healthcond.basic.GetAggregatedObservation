@@ -9,4 +9,6 @@
 		<start>20140901000000</start>
 		<end>20141001000000</end>
 	</tns:time>
+	<!-- The interaction agreement id is just an example -->
+	<tns:interactionAgreementId>de305d54-75b4-431b-adb2-eb6b9e546014</tns:interactionAgreementId>
 </tns:GetObservations>
