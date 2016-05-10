@@ -42,9 +42,9 @@ public class RequestListFactoryImpl implements RequestListFactory {
     public List<Object[]> createRequestList(QueryObject qo, FindContentResponseType src) {
 
         GetObservationsType originalRequest = (GetObservationsType) qo.getExtraArg();
-        String reqCareUnit = "";
+        String sourceSystemId = "";
         if (originalRequest.getSourceSystemHSAId() != null) {
-            reqCareUnit = originalRequest.getSourceSystemHSAId();
+        	sourceSystemId = originalRequest.getSourceSystemHSAId();
         }
 
         FindContentResponseType eiResp = (FindContentResponseType) src;
@@ -56,7 +56,7 @@ public class RequestListFactoryImpl implements RequestListFactory {
 
         for (EngagementType inEng : inEngagements) {
             // TKB 4.1 Uppdatering av engagemangsindex - LogicalAddress: samma värde som fältet Source System.
-            if (isPartOf(reqCareUnit, inEng.getLogicalAddress())) {
+            if (isPartOf(sourceSystemId, inEng.getLogicalAddress())) {
                 // Add pdlUnit to source system
                 log.debug("Add source system: {} for PDL unit: {}", inEng.getSourceSystem(), inEng.getLogicalAddress());
                 addPdlUnitToSourceSystem(sourceSystem_pdlUnitList_map, inEng.getSourceSystem(), inEng.getLogicalAddress());

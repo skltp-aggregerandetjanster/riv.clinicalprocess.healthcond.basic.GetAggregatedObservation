@@ -155,6 +155,7 @@
 		<xs:sequence>
 			<xs:element name="id" type="tns:IIType" minOccurs="0"/>
 			<xs:element name="name" type="xs:string" minOccurs="0"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PatientType">
@@ -213,6 +214,7 @@
 			<xs:element name="id" type="tns:IIType" minOccurs="0"/>
 			<xs:element name="typeCode" type="tns:CVType" minOccurs="0"/>
 			<xs:element name="referredInformationType" type="xs:string" />
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ResultType">
@@ -226,12 +228,14 @@
             <xs:element name="logId" type="xs:string" minOccurs="0"/>
             <xs:element name="subCode" type="xs:string" minOccurs="0" />
             <xs:element name="message" type="xs:string" minOccurs="0"/>
+        	<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 	<xs:complexType name="SCType">
 		<xs:sequence>
 			<xs:element name="code" type="tns:CVType" minOccurs="0"/>
 			<xs:element name="value" type="xs:string" minOccurs="0"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="SourceSystemType">
@@ -290,6 +294,7 @@
 		<xs:sequence>
 			<xs:element name="format" type="codes:TimeStampTypeFormatEnum"/>
 			<xs:element name="value" type="tns:PartialTimeStampValueType"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -330,6 +335,7 @@
 			<xs:element name="ts" type="tns:PartialTimeStampType" minOccurs="0"/>
 			<xs:element name="ivl_ts" type="tns:PartialTimePeriodType" minOccurs="0"/>
 			<xs:element name="cv" type="tns:CVType" minOccurs="0"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
