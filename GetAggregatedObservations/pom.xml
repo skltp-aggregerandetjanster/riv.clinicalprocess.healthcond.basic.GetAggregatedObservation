@@ -13,7 +13,7 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
   <parent>
     <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
     <artifactId>GetAggregatedObservations-parent</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
   </parent>
 
   <artifactId>GetAggregatedObservations</artifactId>
@@ -191,7 +191,8 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
           -->
           <classifier>core</classifier>
           <excludes>
-            <exclude>log4j.xml</exclude>
+            <exclude>log4j2.xml</exclude>
+            <exclude>log4j2-test.xml</exclude>
           </excludes>
         </configuration>
         <executions>
@@ -212,13 +213,13 @@ DON'T CHANGE THE CONTENT OF THIS COMMENT UNLESS YOU REALLY KNOW WHAT YOU ARE DOI
               <goal>copy-resources</goal>
             </goals>
             <configuration>
+              <overwrite>true</overwrite>
               <outputDirectory>${project.build.outputDirectory}</outputDirectory>
               <resources>
                 <resource>
                   <directory>src/environment</directory>
                   <includes>
-                    <include>log4j.xml</include>
-                    <include>log4j.dtd</include>
+                    <include>log4j2.xml</include>
                   </includes>
                 </resource>
               </resources>
