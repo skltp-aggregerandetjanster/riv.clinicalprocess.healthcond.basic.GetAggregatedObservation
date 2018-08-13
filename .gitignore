@@ -8,3 +8,7 @@ GetAggregatedObservations-teststub/.settings
 target
 GetAggregatedObservations/.settings
 .settings
+
+# intellij
+.idea
+*.iml
