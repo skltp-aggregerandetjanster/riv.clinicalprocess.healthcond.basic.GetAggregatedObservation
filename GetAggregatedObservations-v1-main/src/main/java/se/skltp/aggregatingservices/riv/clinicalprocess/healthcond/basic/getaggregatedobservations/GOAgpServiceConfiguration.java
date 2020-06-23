@@ -16,7 +16,7 @@ public class GOAgpServiceConfiguration extends se.skltp.aggregatingservices.conf
 
   public GOAgpServiceConfiguration() {
 
-    setServiceName("GetAggregatedObservations.v1");
+    setServiceName("GetAggregatedObservations-v1");
     setTargetNamespace("urn:riv:clinicalprocess:healthcond:basic:GetObservations:1:rivtabp21");
 
     // Set inbound defaults
