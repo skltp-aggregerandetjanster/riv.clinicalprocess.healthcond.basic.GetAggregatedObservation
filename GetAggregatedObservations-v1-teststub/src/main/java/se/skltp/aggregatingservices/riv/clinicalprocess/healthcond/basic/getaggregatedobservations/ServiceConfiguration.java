@@ -9,7 +9,7 @@ import se.skltp.aggregatingservices.config.TestProducerConfiguration;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix="go.teststub")
+@ConfigurationProperties(prefix="getaggregatedobservations.v1.teststub")
 public class ServiceConfiguration extends TestProducerConfiguration {
   public static final String SCHEMA_PATH = "/schemas/clinicalprocess_healthcond_basic_1.0/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl";
 

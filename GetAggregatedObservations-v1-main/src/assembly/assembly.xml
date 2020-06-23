@@ -9,8 +9,8 @@
   <dependencySets>
     <dependencySet>
       <includes>
-        <include>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic:GetAggregatedObservations-main:jar</include>
-        <include>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic:GetAggregatedObservations-schemas:jar</include>
+        <include>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic:GetAggregatedObservations-v1-main:jar</include>
+        <include>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic:GetAggregatedObservations-v1-schemas:jar</include>
       </includes>
       <useProjectArtifact>true</useProjectArtifact>
       <unpack>true</unpack>
