@@ -18,7 +18,7 @@
 
     <dependency>
       <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
-      <artifactId>GetAggregatedObservations-main</artifactId>
+      <artifactId>GetAggregatedObservations-v1-main</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
