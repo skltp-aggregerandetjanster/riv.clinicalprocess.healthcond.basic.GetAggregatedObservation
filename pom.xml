@@ -12,7 +12,7 @@
 
   <groupId>se.skltp.aggregatingservices.riv.clinicalprocess.healthcond.basic</groupId>
   <artifactId>GetAggregatedObservations-v1</artifactId>
-  <version>2.1.0-RC2-SNAPSHOT</version>
+  <version>2.1.0</version>
   <packaging>pom</packaging>
   <name>GetAggregatedObservations-v1</name>
 
@@ -25,7 +25,7 @@
     <connection>scm:git:https://github.com:443/skltp-aggregerandetjanster/riv.clinicalprocess.healthcond.basic.GetAggregatedObservations.git</connection>
     <developerConnection>scm:git:https://github.com:443/skltp-aggregerandetjanster/riv.clinicalprocess.healthcond.basic.GetAggregatedObservations.git</developerConnection>
     <url>https://github.com/skltp-aggregerandetjanster/riv.clinicalprocess.healthcond.basic.GetAggregatedObservations.git</url>
-    <tag>HEAD</tag>
+    <tag>v2.1.0</tag>
   </scm>
 
 
