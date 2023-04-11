@@ -11,7 +11,7 @@ import se.skltp.aggregatingservices.config.TestProducerConfiguration;
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix="getaggregatedobservations.v1.teststub")
 public class ServiceConfiguration extends TestProducerConfiguration {
-  public static final String SCHEMA_PATH = "/schemas/clinicalprocess_healthcond_basic_1.0/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl";
+  public static final String SCHEMA_PATH = "/schemas/clinicalprocess_healthcond_basic_1.1/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl";
 
   public ServiceConfiguration() {
     setProducerAddress("http://localhost:8083/vp");

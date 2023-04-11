@@ -12,7 +12,7 @@ import riv.clinicalprocess.healthcond.basic.getobservations.v1.rivtabp21.GetObse
 @ConfigurationProperties(prefix = "getaggregatedobservations.v1")
 public class GOAgpServiceConfiguration extends se.skltp.aggregatingservices.configuration.AgpServiceConfiguration {
 
-  public static final String SCHEMA_PATH = "/schemas/clinicalprocess_healthcond_basic_1.0/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl";
+  public static final String SCHEMA_PATH = "/schemas/clinicalprocess_healthcond_basic_1.1/interactions/GetObservationsInteraction/GetObservationsInteraction_1.0_RIVTABP21.wsdl";
 
   public GOAgpServiceConfiguration() {
 

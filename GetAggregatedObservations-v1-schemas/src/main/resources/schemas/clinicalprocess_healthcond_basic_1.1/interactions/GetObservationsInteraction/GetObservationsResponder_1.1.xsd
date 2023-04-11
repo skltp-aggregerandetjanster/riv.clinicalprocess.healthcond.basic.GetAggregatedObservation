@@ -17,8 +17,8 @@
  specific language governing permissions and limitations
  under the License.
  -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1" xmlns:core="urn:riv:clinicalprocess:healthcond:basic:1" targetNamespace="urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
-	<xs:import namespace="urn:riv:clinicalprocess:healthcond:basic:1" schemaLocation="../../core_components/clinicalprocess_healthcond_basic_1.0.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1" xmlns:core="urn:riv:clinicalprocess:healthcond:basic:1" targetNamespace="urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xs:import namespace="urn:riv:clinicalprocess:healthcond:basic:1" schemaLocation="../../core_components/clinicalprocess_healthcond_basic_1.1.xsd"/>
 	<xs:element name="GetObservations" type="tns:GetObservationsType"/>
 	<xs:element name="GetObservationsResponse" type="tns:GetObservationsResponseType"/>
 	<xs:complexType name="GetObservationsType">

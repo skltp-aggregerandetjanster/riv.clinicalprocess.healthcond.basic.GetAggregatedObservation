@@ -30,7 +30,7 @@
     <wsdl:documentation>
 			 Tjänsteinteraktionens namn: GetObservationsInteraction
 			 Beskrivning: 
-			   Retrieval of observation reports 
+			   Returnerar strukturerade observationer för en patient 
 			 Revisioner: 
 			 Tjänstedomän: clinicalprocess:healthcond:basic
 			 Tjänsteinteraktionstyp: Fråga-Svar
@@ -39,7 +39,7 @@
 			 </wsdl:documentation>
   <wsdl:types>
     <xs:schema targetNamespace='urn:riv:clinicalprocess:healthcond:basic:GetObservations:1:rivtabp21'>
-      <xs:import schemaLocation='GetObservationsResponder_1.0.xsd' namespace='urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1' />
+      <xs:import schemaLocation='GetObservationsResponder_1.1.xsd' namespace='urn:riv:clinicalprocess:healthcond:basic:GetObservationsResponder:1' />
       <xs:import schemaLocation='../../core_components/itintegration_registry_1.0.xsd' namespace='urn:riv:itintegration:registry:1' />
 
   </xs:schema>
