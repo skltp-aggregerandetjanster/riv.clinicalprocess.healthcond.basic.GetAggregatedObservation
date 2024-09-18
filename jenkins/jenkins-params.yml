@@ -1,0 +1,2 @@
+maven-docker-image: 'maven:3.9-eclipse-temurin-17'
+jdk-path: openjdk-17
